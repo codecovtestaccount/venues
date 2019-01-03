@@ -18,10 +18,6 @@ class BaseApplication: Application() {
         component.inject(this)
     }
 
-    fun getApplicationComponent(): AppComponent {
-        return component
-    }
-
     companion object {
         fun getAppComponent(activity: Activity) =
             (activity.application as BaseApplication).component
