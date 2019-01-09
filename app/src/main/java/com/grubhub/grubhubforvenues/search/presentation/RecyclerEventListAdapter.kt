@@ -10,10 +10,10 @@ import android.widget.TextView
 import com.grubhub.grubhubforvenues.R
 import com.grubhub.grubhubforvenues.di.module.GlideApp
 
-class RecyclerEventListAdapter : RecyclerView.Adapter<RecyclerEventListAdapter.ViewHolder>() {
+class RecyclerEventListAdapter(var mContext: Context) :
+    RecyclerView.Adapter<RecyclerEventListAdapter.ViewHolder>() {
 
     private var mEvents: List<EventModel> = ArrayList()
-    private lateinit var mContext: Context
 
     class ViewHolder(mRow: View) : RecyclerView.ViewHolder(mRow) {
         var mName: TextView = mRow.findViewById(R.id.name) as TextView
@@ -21,8 +21,7 @@ class RecyclerEventListAdapter : RecyclerView.Adapter<RecyclerEventListAdapter.V
         var mThumbnail: ImageView = mRow.findViewById(R.id.thumbnail) as ImageView
     }
 
-    fun setEvents(context: Context, events: List<EventModel>) {
-        mContext = context
+    fun setEvents(events: List<EventModel>?) {
         mEvents = ArrayList<EventModel>(events)
         notifyDataSetChanged()
     }
@@ -52,9 +51,5 @@ class RecyclerEventListAdapter : RecyclerView.Adapter<RecyclerEventListAdapter.V
 
     override fun getItemCount(): Int {
         return mEvents.size
-    }
-
-    fun getItem(position: Int): Any {
-        return mEvents[position]
     }
 }
