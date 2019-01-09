@@ -1,12 +1,11 @@
 package com.grubhub.grubhubforvenues.search.presentation
 
-import android.util.Log
-import com.grubhub.grubhubforvenues.domain.Notifier
 import com.grubhub.grubhubforvenues.search.domain.FetchEventListUseCase
+import com.grubhub.venuesapi.model.EventResponseModel
 import io.reactivex.Observable
-import io.reactivex.Observer
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
+import io.reactivex.observers.DisposableSingleObserver
 import io.reactivex.schedulers.Schedulers
 import io.reactivex.subjects.PublishSubject
 import io.reactivex.subjects.Subject
@@ -27,25 +26,25 @@ class MainViewModel @Inject constructor() {
     }
 
     fun onResume() {
-        val d = fetchEventListUseCase.build()
-            .doOnSubscribe {
-                Log.d("MainViewModel", "test more stuff")
-            }
-            .doOnError {
-                Log.e("MainViewModel", it.message)
-            }
+        subscriptions.add(fetchEventListUseCase.build()
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
-            .subscribe({
-                subject.map { t -> t.onEventsLoaded(eventModelTransformer.transform(it)) }
-            }, {
-                Log.e("MainViewModel", it.message)
-            })
-        subscriptions.add(d)
+            .subscribeWith(EventFetchObserver()))
     }
 
     fun onStop() {
         subscriptions.dispose()
+    }
+
+    inner class EventFetchObserver: DisposableSingleObserver<List<EventResponseModel>>() {
+
+        override fun onSuccess(events: List<EventResponseModel>) {
+
+        }
+
+        override fun onError(e: Throwable) {
+            TODO("not implemented")
+        }
     }
 
     interface MainViewModelListener {

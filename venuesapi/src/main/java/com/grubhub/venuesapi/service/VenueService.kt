@@ -21,37 +21,6 @@ interface VenueService {
 
     companion object Factory {
         fun create(): VenueService {
-//            // Load CAs from an InputStream
-//            val certificateFactory = CertificateFactory.getInstance("X.509")
-//
-//            val inputStream = context.resources.openRawResource(R.raw.cert) //(.crt)
-//            val certificate = certificateFactory.generateCertificate(inputStream)
-//            inputStream.close()
-//
-//            // Create a KeyStore containing our trusted CAs
-//            val keyStoreType = KeyStore.getDefaultType()
-//            val keyStore = KeyStore.getInstance(keyStoreType)
-//            keyStore.load(null, null)
-//            keyStore.setCertificateEntry("ca", certificate)
-//
-//            // Create a TrustManager that trusts the CAs in our KeyStore.
-//            val tmfAlgorithm = TrustManagerFactory.getDefaultAlgorithm()
-//            val trustManagerFactory = TrustManagerFactory.getInstance(tmfAlgorithm)
-//            trustManagerFactory.init(keyStore)
-//
-//            val trustManagers = trustManagerFactory.trustManagers
-//            val x509TrustManager = trustManagers[0] as X509TrustManager
-//
-//            // Create an SSLSocketFactory that uses our TrustManager
-//            val sslContext = SSLContext.getInstance("SSL")
-//            sslContext.init(null, arrayOf<TrustManager>(x509TrustManager), null)
-//            val sslSocketFactory = sslContext.socketFactory
-//
-//            //create Okhttp client
-//            val client = OkHttpClient.Builder()
-//                .sslSocketFactory(sslSocketFactory, x509TrustManager)
-//                .build()
-
             val retrofit = retrofit2.Retrofit.Builder()
                 .baseUrl("https://webservices.vividseats.com/rest/mobile/v1/home/")
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
@@ -89,6 +58,7 @@ interface VenueService {
                 val builder = OkHttpClient.Builder()
                 builder.sslSocketFactory(sslSocketFactory, trustAllCerts[0] as X509TrustManager)
                 builder.hostnameVerifier { _, _ -> true }
+
                 return builder.build()
             } catch (e: Exception) {
                 throw RuntimeException(e)

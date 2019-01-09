@@ -3,6 +3,7 @@ package com.grubhub.grubhubforvenues.search.presentation
 import android.databinding.DataBindingUtil
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.support.v7.widget.LinearLayoutManager
 import android.util.Log
 import com.grubhub.grubhubforvenues.BaseApplication
 import com.grubhub.grubhubforvenues.R
@@ -13,13 +14,13 @@ import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.functions.Consumer
 import javax.inject.Inject
 
-class MainActivity : AppCompatActivity(), MainViewModel.MainViewModelListener {
+class MainActivity : AppCompatActivity() {
 
     var compositeDisposable: CompositeDisposable = CompositeDisposable()
 
-    @Inject lateinit var venueService: VenueService
     @Inject lateinit var viewModel: MainViewModel
     private lateinit var binding: ActivityMainBinding
+    private var adapter: RecyclerEventListAdapter = RecyclerEventListAdapter()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,7 +28,8 @@ class MainActivity : AppCompatActivity(), MainViewModel.MainViewModelListener {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
         setContentView(R.layout.activity_main)
 
-        compositeDisposable.add(viewModel.subject().subscribe())
+        binding.eventList.layoutManager = LinearLayoutManager(this)
+        binding.eventList.adapter = adapter
     }
 
     override fun onResume() {
@@ -45,7 +47,8 @@ class MainActivity : AppCompatActivity(), MainViewModel.MainViewModelListener {
         compositeDisposable.clear()
     }
 
-    override fun onEventsLoaded(events: List<EventModel>) {
-        Log.i(this.javaClass.simpleName, events.toString())
-    }
+//    override fun onEventsLoaded(events: List<EventModel>) {
+//        Log.i(this.javaClass.simpleName, events.toString())
+//        adapter.setEvents(this, events)
+//    }
 }
