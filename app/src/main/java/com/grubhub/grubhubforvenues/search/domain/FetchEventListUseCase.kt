@@ -7,7 +7,7 @@ import io.reactivex.Single
 import javax.inject.Inject
 
 class FetchEventListUseCase
-@Inject constructor(private val eventRepository: EventRepository) : NoParamObservableUseCase<List<EventResponseModel>> {
+@Inject constructor(private val eventRepository: IEventRepository) : NoParamObservableUseCase<List<EventResponseModel>> {
     override fun build(): Single<List<EventResponseModel>> {
         return eventRepository.getEvents()
     }

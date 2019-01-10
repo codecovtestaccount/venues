@@ -18,7 +18,7 @@ class MainViewModel @Inject constructor(): ViewModel() {
     @Inject
     lateinit var fetchEventListUseCase: FetchEventListUseCase
     @Inject
-    lateinit var eventModelTransformer: EventModelTransformer
+    lateinit var eventModelTransformer: IEventModelTransformer
 
     private var events: MutableLiveData<List<EventModel>> = MutableLiveData()
 
