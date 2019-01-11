@@ -26,8 +26,12 @@ class SearchModule {
     }
 
     @Provides
-    @Named("FetchEventListUseCase")
+    @Named(FETCH_EVENT_LIST_USE_CASE)
     fun fetchEventListUseCase(eventRepository: IEventRepository): NoParamObservableUseCase<List<EventResponseModel>> {
         return FetchEventListUseCase(eventRepository)
+    }
+
+    companion object {
+        const val FETCH_EVENT_LIST_USE_CASE = "FetchEventListUseCase"
     }
 }

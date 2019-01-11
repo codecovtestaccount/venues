@@ -2,40 +2,32 @@ package com.grubhub.grubhubforvenues.search.presentation
 
 import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.ViewModel
+import com.grubhub.grubhubforvenues.di.module.DataModule.Companion.BACKGROUND_SCHEDULER
+import com.grubhub.grubhubforvenues.di.module.SearchModule.Companion.FETCH_EVENT_LIST_USE_CASE
 import com.grubhub.grubhubforvenues.domain.NoParamObservableUseCase
+import com.grubhub.grubhubforvenues.domain.UseCaseScheduler
 import com.grubhub.venuesapi.model.EventResponseModel
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.observers.DisposableSingleObserver
-import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 import javax.inject.Named
 
-class MainViewModel @Inject constructor(): ViewModel() {
-
-    @Inject
-    @field:Named("FetchEventListUseCase")
-    lateinit var fetchEventListUseCase: NoParamObservableUseCase<List<EventResponseModel>>
-    @Inject
-    lateinit var eventModelTransformer: IEventModelTransformer
+class MainViewModel
+@Inject constructor(@Named(BACKGROUND_SCHEDULER) val scheduler: UseCaseScheduler,
+                    @Named(FETCH_EVENT_LIST_USE_CASE) val fetchEventListUseCase: NoParamObservableUseCase<List<EventResponseModel>>,
+                    val eventModelTransformer: IEventModelTransformer): ViewModel() {
 
     private var events: MutableLiveData<List<EventModel>> = MutableLiveData()
-
-    private val subscriptions = CompositeDisposable()
 
     fun events(): MutableLiveData<List<EventModel>> {
         return events
     }
 
     fun onResume() {
-        subscriptions.add(fetchEventListUseCase.build()
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribeWith(EventFetchObserver()))
+        scheduler.execute(fetchEventListUseCase.build(), EventFetchObserver())
     }
 
     fun onStop() {
-        subscriptions.dispose()
+        scheduler.dispose()
     }
 
     inner class EventFetchObserver: DisposableSingleObserver<List<EventResponseModel>>() {
