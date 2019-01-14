@@ -9,11 +9,15 @@ import android.widget.ImageView
 import android.widget.TextView
 import com.grubhub.grubhubforvenues.R
 import com.grubhub.grubhubforvenues.di.module.GlideApp
+import io.reactivex.Observable
+import io.reactivex.subjects.PublishSubject
 
 class RecyclerEventListAdapter(var mContext: Context) :
     RecyclerView.Adapter<RecyclerEventListAdapter.ViewHolder>() {
 
     private var mEvents: List<EventModel> = ArrayList()
+
+    private val onClickSubject : PublishSubject<EventModel> = PublishSubject.create()
 
     class ViewHolder(mRow: View) : RecyclerView.ViewHolder(mRow) {
         var mName: TextView = mRow.findViewById(R.id.name) as TextView
@@ -47,9 +51,15 @@ class RecyclerEventListAdapter(var mContext: Context) :
             .load(e.imageUrl)
             .error(R.drawable.default_image)
             .into(holder.mThumbnail)
+
+        holder.itemView.setOnClickListener { onClickSubject.onNext(e) }
     }
 
     override fun getItemCount(): Int {
         return mEvents.size
+    }
+
+    fun getPositionClicks(): Observable<EventModel> {
+        return onClickSubject
     }
 }
