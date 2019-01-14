@@ -1,11 +1,11 @@
 package com.grubhub.grubhubforvenues.di.module
 
 import com.grubhub.grubhubforvenues.domain.NoParamObservableUseCase
-import com.grubhub.grubhubforvenues.search.data.EventRepository
-import com.grubhub.grubhubforvenues.search.domain.FetchEventListUseCase
-import com.grubhub.grubhubforvenues.search.data.IEventRepository
-import com.grubhub.grubhubforvenues.search.presentation.EventModelTransformer
-import com.grubhub.grubhubforvenues.search.presentation.IEventModelTransformer
+import com.grubhub.grubhubforvenues.browse.data.EventRepository
+import com.grubhub.grubhubforvenues.browse.domain.FetchEventListUseCase
+import com.grubhub.grubhubforvenues.browse.data.IEventRepository
+import com.grubhub.grubhubforvenues.browse.presentation.EventModelTransformer
+import com.grubhub.grubhubforvenues.browse.presentation.IEventModelTransformer
 import com.grubhub.venuesapi.model.EventResponseModel
 import com.grubhub.venuesapi.service.VenueService
 import dagger.Module

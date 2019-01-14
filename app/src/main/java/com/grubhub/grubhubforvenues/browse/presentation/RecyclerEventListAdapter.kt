@@ -1,4 +1,4 @@
-package com.grubhub.grubhubforvenues.search.presentation
+package com.grubhub.grubhubforvenues.browse.presentation
 
 import android.content.Context
 import android.support.v7.widget.RecyclerView

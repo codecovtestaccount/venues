@@ -1,4 +1,4 @@
-package com.grubhub.grubhubforvenues.search.presentation
+package com.grubhub.grubhubforvenues.browse.presentation
 
 import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.ViewModel
@@ -11,7 +11,7 @@ import io.reactivex.observers.DisposableSingleObserver
 import javax.inject.Inject
 import javax.inject.Named
 
-class MainViewModel
+class BrowseViewModel
 @Inject constructor(@Named(BACKGROUND_SCHEDULER) val scheduler: UseCaseScheduler,
                     @Named(FETCH_EVENT_LIST_USE_CASE) val fetchEventListUseCase: NoParamObservableUseCase<List<EventResponseModel>>,
                     val eventModelTransformer: IEventModelTransformer): ViewModel() {

@@ -1,4 +1,4 @@
-package com.grubhub.grubhubforvenues.search.presentation
+package com.grubhub.grubhubforvenues.browse.presentation
 
 import com.google.common.truth.Truth.assertThat
 import com.grubhub.venuesapi.model.EventResponseModel

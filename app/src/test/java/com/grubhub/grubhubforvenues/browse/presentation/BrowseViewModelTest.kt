@@ -1,4 +1,4 @@
-package com.grubhub.grubhubforvenues.search.presentation
+package com.grubhub.grubhubforvenues.browse.presentation
 
 import com.grubhub.grubhubforvenues.di.domain.TestUseCaseScheduler
 import com.grubhub.grubhubforvenues.domain.NoParamObservableUseCase
@@ -13,7 +13,7 @@ import org.mockito.Mockito
 import org.mockito.junit.MockitoJUnitRunner
 
 @RunWith(MockitoJUnitRunner::class)
-class MainViewModelTest {
+class BrowseViewModelTest {
 
     var useCaseScheduler: UseCaseScheduler = TestUseCaseScheduler()
     @Mock
@@ -21,11 +21,11 @@ class MainViewModelTest {
     @Mock
     lateinit var transformer: IEventModelTransformer
 
-    private lateinit var target: MainViewModel
+    private lateinit var target: BrowseViewModel
 
     @Before
     fun setup() {
-        target = MainViewModel(useCaseScheduler, fetchEventListUseCase, transformer)
+        target = BrowseViewModel(useCaseScheduler, fetchEventListUseCase, transformer)
     }
 
     @Test

@@ -1,7 +1,7 @@
-package com.grubhub.grubhubforvenues.search.domain
+package com.grubhub.grubhubforvenues.browse.domain
 
 import com.grubhub.grubhubforvenues.domain.NoParamObservableUseCase
-import com.grubhub.grubhubforvenues.search.data.IEventRepository
+import com.grubhub.grubhubforvenues.browse.data.IEventRepository
 import com.grubhub.venuesapi.model.EventResponseModel
 import io.reactivex.Single
 

@@ -1,4 +1,4 @@
-package com.grubhub.grubhubforvenues.search.data
+package com.grubhub.grubhubforvenues.browse.data
 
 import com.grubhub.venuesapi.model.EventResponseModel
 import com.grubhub.venuesapi.service.VenueService

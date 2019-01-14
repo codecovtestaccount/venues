@@ -1,4 +1,4 @@
-package com.grubhub.grubhubforvenues.search.data
+package com.grubhub.grubhubforvenues.browse.data
 
 import com.google.common.truth.Truth
 import com.grubhub.venuesapi.model.EventResponseModel
