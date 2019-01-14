@@ -3,7 +3,7 @@ package com.grubhub.grubhubforvenues.di.module
 import com.grubhub.grubhubforvenues.domain.NoParamObservableUseCase
 import com.grubhub.grubhubforvenues.search.data.EventRepository
 import com.grubhub.grubhubforvenues.search.domain.FetchEventListUseCase
-import com.grubhub.grubhubforvenues.search.domain.IEventRepository
+import com.grubhub.grubhubforvenues.search.data.IEventRepository
 import com.grubhub.grubhubforvenues.search.presentation.EventModelTransformer
 import com.grubhub.grubhubforvenues.search.presentation.IEventModelTransformer
 import com.grubhub.venuesapi.model.EventResponseModel

@@ -1,4 +1,4 @@
-package com.grubhub.grubhubforvenues.search.domain
+package com.grubhub.grubhubforvenues.search.data
 
 import com.grubhub.venuesapi.model.EventResponseModel
 import io.reactivex.Single

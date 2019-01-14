@@ -1,7 +1,7 @@
 package com.grubhub.grubhubforvenues.search.domain
 
 import com.google.common.truth.Truth
-import com.grubhub.grubhubforvenues.search.data.EventRepository
+import com.grubhub.grubhubforvenues.search.data.IEventRepository
 import com.grubhub.venuesapi.model.EventResponseModel
 import io.reactivex.Single
 import io.reactivex.observers.TestObserver
