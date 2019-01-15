@@ -58,6 +58,7 @@ dependencies {
     kapt 'com.github.bumptech.glide:compiler:4.8.0'
 
     implementation project(':venuesapi')
+    implementation project(':details')
 
     kapt 'com.google.dagger:dagger-compiler:2.19'
     testImplementation 'junit:junit:4.12'

@@ -8,6 +8,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.grubhub.details.presentation.EventActivity
 import com.grubhub.grubhubforvenues.BaseApplication
 import com.grubhub.grubhubforvenues.R
 import com.grubhub.grubhubforvenues.di.module.DataModule
@@ -42,7 +43,7 @@ class BrowseFragment : Fragment() {
         root.event_list.adapter = adapter
 
         compositeDisposable.add(adapter.getPositionClicks().subscribeOn(ioScheduler).subscribe {
-            Log.i("Browse", "Event: " + it.name)
+            startActivity(EventActivity.Intent(context))
         })
 
         viewModel.events().observe(this, Observer { adapter.setEvents(it) })
