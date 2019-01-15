@@ -4,14 +4,13 @@ import android.arch.lifecycle.Observer
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.grubhub.details.presentation.EventActivity
+import com.grubhub.details.presentation.EventModel
 import com.grubhub.grubhubforvenues.BaseApplication
 import com.grubhub.grubhubforvenues.R
-import com.grubhub.grubhubforvenues.di.module.DataModule
 import com.grubhub.grubhubforvenues.di.module.DataModule.Companion.IO_SCHEDULER
 import io.reactivex.Scheduler
 import io.reactivex.disposables.CompositeDisposable
@@ -43,7 +42,7 @@ class BrowseFragment : Fragment() {
         root.event_list.adapter = adapter
 
         compositeDisposable.add(adapter.getPositionClicks().subscribeOn(ioScheduler).subscribe {
-            startActivity(EventActivity.Intent(context))
+            startActivity(EventActivity.intent(context, EventModel(it.name, it.imageUrl, it.date)))
         })
 
         viewModel.events().observe(this, Observer { adapter.setEvents(it) })
